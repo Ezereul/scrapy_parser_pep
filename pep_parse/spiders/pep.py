@@ -16,7 +16,7 @@ class PepSpider(scrapy.Spider):
         for table in tables:
             table_links = table.css('tr td + td a::attr(href)').getall()
             for pep_link in table_links:
-                yield response.follow(pep_link, callback=self.parse_pep)
+                yield response.follow(pep_link + '/', callback=self.parse_pep)
 
     def parse_pep(self, response):
         pattern = r'PEP (?P<number>\d+) – (?P<name>.*)'
